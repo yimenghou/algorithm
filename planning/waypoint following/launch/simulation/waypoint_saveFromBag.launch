@@ -1,0 +1,16 @@
+<!-- -->
+<launch>
+	<!-- waypoint saver -->
+	<arg name="waypointFilePath" default="/home/yimeng/Documents/waypoints/waypoints_sim0413.txt" />
+	<arg name="pubrate" default="0.5" />
+
+	<!-- waypoint saver -->
+	<node pkg="waypoint_follower" type="saveWaypoints.py" name="waypoint_saver" output="screen">
+	    <param name="waypointFilePath" value="$(arg waypointFilePath)" />
+	    <param name="pubrate" value="$(arg pubrate)" />
+	</node>
+
+	<!-- play rosbag -->
+  	<node pkg="rosbag" type="play" name="player" output="screen" args="/media/yimeng/0ade5f79-daf5-43f5-9b3f-fbad02d13a32/dataset/rosbag/2017-04-13_parking_lot/outdoor_free_move_2017-04-13-16-18-35.bag"/>
+
+</launch>

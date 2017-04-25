@@ -1,0 +1,33 @@
+<!-- -->
+<launch>
+
+	<!-- pure pursuit -->
+	<arg name="is_linear_interpolation" default="True"/>
+	<arg name="vehicle_info/wheel_base" default="2.7"/>
+	<arg name="linear_velocity" default="0.4" />
+
+	<!-- waypoint loader -->
+	<arg name="waypointFilePath" default="/home/yimeng/Documents/waypoints/waypoints_sim0413.txt" />
+
+	<!-- pure_pursuit -->
+	<node pkg="waypoint_follower" type="pure_pursuit" name="pure_pursuit" output="log">
+		<param name="is_linear_interpolation" value="$(arg is_linear_interpolation)"/>
+		<param name="linear_velocity" value="$(arg linear_velocity)"/>
+		<param name="vehicle_info/wheel_base" value="$(arg vehicle_info/wheel_base)"/>
+	</node>
+
+	<!-- waypoint loader -->
+	<node pkg="waypoint_follower" type="loadWaypoints.py" name="waypoint_loader" output="log">
+	    <param name="waypointFilePath" value="$(arg waypointFilePath)" />
+	</node>
+
+	<!-- play rosbag -->
+  	<node pkg="rosbag" type="play" name="player" output="screen" args="/media/yimeng/0ade5f79-daf5-43f5-9b3f-fbad02d13a32/dataset/rosbag/2017-04-13_parking_lot/outdoor_free_move_2017-04-13-16-18-35.bag"/>	
+
+  	<!-- visualizer -->
+   <include file="$(find rocky_sim)/launch/rocky_sim_test.launch" output="log"/>  
+
+    <!-- topic remapper -->
+	<node pkg="satimu" type="odom2pose.py" name="odom2pose"/>
+
+</launch>

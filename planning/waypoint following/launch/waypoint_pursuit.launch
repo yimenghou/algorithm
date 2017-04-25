@@ -1,0 +1,24 @@
+<!-- -->
+<launch>
+
+	<!-- waypoint loader -->
+	<arg name="waypointFilePath" default="/home/yimeng/Documents/waypoints/waypoints_sim0418.txt" />
+
+	<!-- pure_pursuit -->
+	<arg name="is_linear_interpolation" default="True"/>
+	<arg name="vehicle_info/wheel_base" default="2.7"/>
+	<arg name="linear_velocity" default="0.4" />
+
+	<!-- pure_pursuit -->
+	<node pkg="waypoint_follower" type="pure_pursuit" name="pure_pursuit" output="log">
+		<param name="is_linear_interpolation" value="$(arg is_linear_interpolation)"/>
+		<param name="linear_velocity" value="$(arg linear_velocity)"/>
+		<param name="vehicle_info/wheel_base" value="$(arg vehicle_info/wheel_base)"/>
+	</node>
+
+	<!-- waypoint loader -->
+	<node pkg="waypoint_follower" type="loadWaypoints.py" name="waypoint_loader" output="screen">
+	    <param name="waypointFilePath" value="$(arg waypointFilePath)" />
+	</node>
+
+</launch>

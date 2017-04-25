@@ -1,0 +1,11 @@
+<!-- -->
+<launch>
+	<!-- waypoint loader -->
+	<arg name="waypointFilePath" default="/home/yimeng/Documents/waypoints/waypoints_sim0413.txt" />
+
+	<!-- waypoint loader -->
+	<node pkg="waypoint_follower" type="loadWaypoints.py" name="waypoint_loader" output="screen">
+	    <param name="waypointFilePath" value="$(arg waypointFilePath)" />
+	</node>
+
+</launch>

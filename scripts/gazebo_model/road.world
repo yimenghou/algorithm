@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="default">
+    <scene>
+      <grid>false</grid>
+    </scene>
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <road name="Motorway">
+      <width>5</width>
+      <point>0 0 0.005</point>
+      <point>-92 -38 0.005</point>
+      <point>-180 -60 0.005</point>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Motorway</name>
+        </script>
+      </material>
+    </road>
+
+    <road name="Trunk">
+      <width>5</width>
+      <point>0 0 0.005</point>
+      <point>92 38 0.005</point>
+      <material>
+        <script>
+          <uri>file://media/materials/scripts/gazebo.material</uri>
+          <name>Gazebo/Trunk</name>
+        </script>
+      </material>
+    </road>
+  </world>
+</sdf>
